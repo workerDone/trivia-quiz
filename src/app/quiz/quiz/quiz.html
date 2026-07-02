@@ -1,0 +1,36 @@
+@if (quizResource.isLoading()) {
+  <app-loading-spinner />
+}  @else if (quizResource.error()) {
+  <app-error-message
+    message="Something went wrong while loading the quiz."
+    (retry)="reload()"
+  />
+} @else if (currentQuestion(); as question) {
+  <mat-card class="quiz-card" appearance="outlined">
+    <div class="top-bar">
+      <button mat-button (click)="cancel()">Cancel</button>
+    </div>
+    <mat-card-header>
+      <mat-card-title>{{ question.category }} </mat-card-title>
+      <mat-card-subtitle>
+        Question {{ questionsCount() }} | <app-timer (expired)="showResult()" [seconds]="this.timeInSeconds()"/>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="question" >{{question.question}}</p>
+      <div class="answers">
+        @for (option of question.options; track option) {
+          <button
+            mat-stroked-button
+            [ngClass]="{answer: true, selected: selectedAnswer() === option}"
+            (click)="select(option)">{{option}}
+          </button>
+        }
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+      <button mat-stroked-button [disabled]="isFirst()" (click)="previous()">Previous</button>
+      <button mat-flat-button [disabled]="isLast() || !isCurrentQuestionAnswered()" (click)="next()">Next</button>
+    </mat-card-actions>
+  </mat-card>
+}

@@ -1,0 +1,9 @@
+.timer {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+
+  &.ending {
+    color: #d32f2f;
+  }
+}
+

@@ -1,0 +1,63 @@
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+            color: (
+                    primary: mat.$azure-palette,
+                    tertiary: mat.$blue-palette,
+            ),
+            typography: Roboto,
+            density: 0,
+    )
+  );
+}
+
+:root {
+  --bg: #0e0e17;
+  --surface-1: #16161f;
+  --surface-2: #1f1f2b;
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #ece7e7;
+  --text-muted: #9a9aad;
+  --primary: #ff4f9a;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --error: #fb7185;
+
+  --quiz-success: #2e7d32;
+  --quiz-success-light: #e8f5e9;
+  --quiz-success-mid: #4caf50;
+  --quiz-fail: #c62828;
+  --quiz-fail-light: #ffebee;
+  --quiz-fail-mid: #ef5350;
+  --brand-gradient: linear-gradient(90deg, #ff4f9a 0%, #ff8a5b 100%);
+
+  // Align Material's primary with the brand pink.
+  --mat-sys-primary: var(--primary);
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  background: radial-gradient(
+                  1200px 600px at 100% -10%,
+                  color-mix(in srgb, var(--primary) 14%, transparent),
+                  transparent
+  ),
+  var(--bg);
+  color: var(--text-muted);
+  font-family: Roboto, 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  height: 100%;
+}
+
+.accent {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+

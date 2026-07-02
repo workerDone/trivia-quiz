@@ -1,0 +1,33 @@
+<section class="quizzes-page">
+  <header class="header">
+    <div>
+      <div class="title">Pick a <span class="accent">Category</span></div>
+      <div class="text">{{ quizzes.value()?.length }} categories available</div>
+    </div>
+    @if (!quizzes.isLoading() && !quizzes.error() && quizzes.value()?.length) {
+      <button mat-flat-button (click)="startRandom()">Start random quiz</button>
+    }
+  </header>
+  @if (quizzes.isLoading()) {
+    <app-loading-spinner />
+  } @else if (quizzes.error()) {
+    <app-error-message
+      message="Something went wrong while loading categories."
+      (retry)="reload()"
+    />
+  } @else if (quizzes.hasValue()) {
+    <div class="container">
+      @for (quiz of quizzes.value(); track quiz.id) {
+        <mat-card class="card" appearance="outlined">
+          <mat-card-header class="title">
+            <mat-card-title>{{ quiz.name }}</mat-card-title>
+            <mat-card-subtitle>Questions: (10 of {{ quiz.questionSize }})</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions>
+            <button mat-flat-button [routerLink]="[quiz.id]">Start</button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  }
+</section>

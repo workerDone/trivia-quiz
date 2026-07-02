@@ -1,0 +1,56 @@
+<div class="container" [class.success]="success()">
+  <div class="card">
+    <div class="header">
+      <div class="icon">{{ success() ? '✓' : '✗' }}</div>
+      <h1 class="title">{{ success() ? 'Quiz Passed!' : 'Quiz Failed' }}</h1>
+      <p class="subtitle">You scored {{ correctAnswers() }} out of {{ size() }} questions</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-item points">
+        <span class="value">{{ points() }}</span>
+        <span class="label">Points</span>
+      </div>
+      <div class="stat-item time">
+        <span class="value">{{ timeInSeconds()!|time }}</span>
+        <span class="label">Spent time</span>
+      </div>
+      <div class="stat-item correct">
+        <span class="value">{{ correctAnswers() }}</span>
+        <span class="label">Correct</span>
+      </div>
+      <div class="stat-item wrong">
+        <span class="value">{{ wrongAnswers() }}</span>
+        <span class="label">Wrong</span>
+      </div>
+      <div class="stat-item total">
+        <span class="value">{{ size() }}</span>
+        <span class="label">Total</span>
+      </div>
+      <div class="stat-item target">
+        <span class="value">{{ target() }}%</span>
+        <span class="label">Target</span>
+      </div>
+    </div>
+
+    <div class="score-bar-wrapper">
+      <div class="bar">
+        <div
+          class="fill"
+          [style.width.%]="size() ? (correctAnswers()! / size()!) * 100 : 0"
+        ></div>
+        <div class="target-marker" [style.left.%]="target()"></div>
+      </div>
+      <div class="labels">
+        <span>0%</span>
+        <span>Target: {{ target() }}%</span>
+        <span>100%</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="button secondary" [routerLink]="'/' + id()">Try Again</a>
+      <a class="button primary" routerLink="/">Back to Quizzes</a>
+    </div>
+  </div>
+</div>
